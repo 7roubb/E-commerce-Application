@@ -39,4 +39,9 @@ public class CustomExceptions {
             super(message);
         }
     }
+    public static class AddressNotFound extends RuntimeException {
+        public AddressNotFound() {
+            super();
+        }
+    }
 }

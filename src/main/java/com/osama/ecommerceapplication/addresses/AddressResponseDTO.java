@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddressResponseDTO {
-
     private Long addressId;
     private String street;
     private String city;

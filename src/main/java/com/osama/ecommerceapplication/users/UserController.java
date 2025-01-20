@@ -1,6 +1,7 @@
 package com.osama.ecommerceapplication.users;
 
 import com.osama.ecommerceapplication.common.ApiResponse;
+import com.osama.ecommerceapplication.common.OnCreate;
 import com.osama.ecommerceapplication.common.OnUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -22,6 +23,13 @@ public class UserController {
     public ApiResponse<UserResponseDTO> getUserByUserName(@RequestParam String username) {
         UserResponseDTO userResponse = userService.getUser(username);
         return ApiResponse.success(userResponse, HttpStatus.OK, getMessage("user.get.success", username));
+    }
+
+    @PostMapping
+    public ApiResponse<UserResponseDTO> createUser(@Validated(OnCreate.class) @RequestBody UserRequestDTO userRequestDTO) {
+        UserResponseDTO userResponse = userService.createUser(userRequestDTO);
+        return ApiResponse.success(userResponse, HttpStatus.OK, getMessage("user.create.success", userRequestDTO.getUsername()));
+
     }
 
 

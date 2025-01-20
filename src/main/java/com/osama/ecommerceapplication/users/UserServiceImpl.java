@@ -1,19 +1,24 @@
 package com.osama.ecommerceapplication.users;
 
+import com.osama.ecommerceapplication.addresses.Address;
+import com.osama.ecommerceapplication.addresses.AddressMapper;
+import com.osama.ecommerceapplication.addresses.AddressRepository;
 import com.osama.ecommerceapplication.exceptions.CustomExceptions;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final AddressRepository addressRepository;
 
     @Override
     @Transactional
@@ -35,8 +40,13 @@ public class UserServiceImpl implements UserService {
                 .ifPresent(user -> {
                     throw new CustomExceptions.EmailAlreadyExistsException(userRequestDTO.getEmail());
                 });
-
+        Set<Address> addresses = userRequestDTO.getAddress().stream()
+                .map(AddressMapper::toAddress)
+                .collect(Collectors.toSet());
         User user = UserMapper.toUser(userRequestDTO);
+        addressRepository.saveAll(addresses);
+
+        user.setAddresses(addresses);
         User savedUser = userRepository.save(user);
         return UserMapper.toUserResponse(savedUser);
     }

@@ -1,5 +1,6 @@
 package com.osama.ecommerceapplication.users;
 
+import com.osama.ecommerceapplication.addresses.AddressRequestDTO;
 import com.osama.ecommerceapplication.common.OnCreate;
 import com.osama.ecommerceapplication.common.OnUpdate;
 import jakarta.validation.Valid;
@@ -8,7 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
-
+import java.util.Set;
 
 @Getter
 @Setter
@@ -44,9 +45,12 @@ public class UserRequestDTO {
 
     @NotBlank(groups = {OnCreate.class},
             message = "{user.fullName.required}")
-    @Pattern(regexp = "^[A-Za-z\s'-]{1,50}$")
+    @Pattern(regexp = "^[A-Za-z\s'-]{1,50}$",groups = {OnCreate.class})
     private String fullName;
 
+    @NotNull(groups = {OnCreate.class})
+    @Valid
+    private Set<AddressRequestDTO> address;
 
 
 }

@@ -1,7 +1,6 @@
 package com.osama.ecommerceapplication.exceptions;
 
 import com.osama.ecommerceapplication.common.ApiResponse;
-import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -22,9 +21,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomExceptions.UserAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<Void>> handleUserAlreadyExistsException(CustomExceptions.UserAlreadyExistsException ex) {
-        String message = messageSource.getMessage("exception.user.already.exists", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ApiResponse.error(message, HttpStatus.CONFLICT));
+        String message = messageSource
+                .getMessage(
+                        "exception.user.already.exists",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiResponse
+                        .error(
+                            message,
+                            HttpStatus.CONFLICT
+                        )
+                );
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -44,42 +54,96 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(CustomExceptions.UserNotFound.class)
     public ResponseEntity<ApiResponse<Void>> handleUserNotFound(CustomExceptions.UserNotFound ex) {
-        String message = messageSource.getMessage("user.not.found", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error(message, HttpStatus.NOT_FOUND));
+        String message = messageSource
+                .getMessage(
+                        "user.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity.
+                status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(message,
+                        HttpStatus.NOT_FOUND)
+                );
     }
     @ExceptionHandler(CustomExceptions.EmailAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<Void>> handleEmailAlreadyExists(CustomExceptions.EmailAlreadyExistsException ex) {
-        String message = messageSource.getMessage("exception.email.already.exists", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(ApiResponse.error(message, HttpStatus.CONFLICT));
+        String message = messageSource
+                .getMessage("exception.email.already.exists",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiResponse.error(
+                        message,
+                        HttpStatus.CONFLICT)
+                );
     }
 
     @ExceptionHandler(CustomExceptions.TaskNotFound.class)
     public ResponseEntity<ApiResponse<Void>> handleTaskNotFound(CustomExceptions.TaskNotFound ex) {
-        String message = messageSource.getMessage("task.not.found", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error(message, HttpStatus.NOT_FOUND));
+        String message = messageSource
+                .getMessage(
+                        "task.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.
+                        error(
+                                message,
+                                HttpStatus.NOT_FOUND)
+                );
 
     }
     @ExceptionHandler(CustomExceptions.WrongPasswordOrEmail.class)
     public ResponseEntity<ApiResponse<Void>> handleWrongPasswordOrEmail(CustomExceptions.WrongPasswordOrEmail ex) {
-        String message = messageSource.getMessage("bad.credential", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error(message, HttpStatus.UNAUTHORIZED));
+        String message = messageSource.
+                getMessage(
+                        "bad.credential",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale());
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.UNAUTHORIZED)
+                );
 
     }
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ResponseEntity<ApiResponse<Void>> handleExpiredJwtException(ExpiredJwtException ex) {
-        String message = messageSource.getMessage("bad.credential", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error(message, HttpStatus.UNAUTHORIZED));
 
-    }
     @ExceptionHandler(CustomExceptions.RateLimitExceededException.class)
     public ResponseEntity<ApiResponse<Void>> handleRateLimitExceeded(CustomExceptions.RateLimitExceededException ex) {
-        String message = messageSource.getMessage("rate.limit.exceeded", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
-                .body(ApiResponse.error(message, HttpStatus.TOO_MANY_REQUESTS));
+        String message = messageSource.
+                getMessage(
+                        "rate.limit.exceeded",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale());
+        return ResponseEntity
+                .status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.TOO_MANY_REQUESTS
+                        )
+                );
+    }
+    @ExceptionHandler(CustomExceptions.AddressNotFound.class)
+    public ResponseEntity<ApiResponse<Void>> handleAddressNotFoundException(CustomExceptions.AddressNotFound ex) {
+        String message = messageSource.getMessage(
+                "address.not.found",
+                new Object[]{},
+                LocaleContextHolder.getLocale());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
     }
 }
