@@ -8,7 +8,7 @@ public interface AddressService {
 
     AddressResponseDTO updateAddress(AddressRequestDTO addressRequestDTO);
 
-    Boolean deleteAddressByAddressIdAndUsers(Long addressId, Long userId);
+    void deleteAddressByAddressIdAndUsers(Long addressId, Long userId);
 
     List<AddressResponseDTO> getAddressesByUserId(Long id);
 

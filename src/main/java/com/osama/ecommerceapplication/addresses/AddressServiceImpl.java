@@ -1,6 +1,8 @@
 package com.osama.ecommerceapplication.addresses;
 
 import com.osama.ecommerceapplication.exceptions.CustomExceptions;
+import com.osama.ecommerceapplication.users.User;
+import com.osama.ecommerceapplication.users.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
 
     @Override
     public AddressResponseDTO createAddress(AddressRequestDTO addressRequestDTO) {
@@ -46,9 +49,12 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Boolean deleteAddressByAddressIdAndUsers(Long addressId, Long userId) {
-        return addressRepository.
-                deleteAddressByAddressIdAndUsers_Id(addressId, userId);
+    public void deleteAddressByAddressIdAndUsers(Long addressId, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Address address = addressRepository.findById(addressId).orElseThrow();
+        user.getAddresses().remove(address);
+        userRepository.save(user);;
+        addressRepository.delete(address);
     }
 
     @Override

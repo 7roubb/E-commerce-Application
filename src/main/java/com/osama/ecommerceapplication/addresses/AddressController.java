@@ -3,20 +3,17 @@ package com.osama.ecommerceapplication.addresses;
 
 import com.osama.ecommerceapplication.common.ApiResponse;
 import com.osama.ecommerceapplication.common.OnCreate;
-import com.osama.ecommerceapplication.users.UserService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RestController("/address")
+@RestController
+@RequestMapping("/address")
 @RequiredArgsConstructor
 public class AddressController {
     private final AddressService addressService;
@@ -31,7 +28,7 @@ public class AddressController {
                 getMessage("address.create.success")
         );
     }
-    @GetMapping
+    @GetMapping("/all")
     public ApiResponse<List<AddressResponseDTO>> getAddressesByUserId(@RequestHeader Long userId) {
         List<AddressResponseDTO> addresses = addressService.getAddressesByUserId(userId);
         return ApiResponse.success(
@@ -62,10 +59,10 @@ public class AddressController {
     }
 
     @DeleteMapping
-    public ApiResponse<Boolean> deleteAddress(@RequestHeader Long addressId ,@RequestHeader Long userId) {
-        Boolean flag = addressService.deleteAddressByAddressIdAndUsers(addressId, userId);
+    public ApiResponse<Boolean> deleteAddress(@RequestHeader Long addressId , @RequestHeader Long userId) {
+        addressService.deleteAddressByAddressIdAndUsers(addressId, userId);
         return ApiResponse.success(
-                flag,
+                null,
                 HttpStatus.OK,
                 getMessage("address.delete.success")
         );

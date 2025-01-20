@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address,Long> {
-    Boolean deleteAddressByAddressIdAndUsers_Id(Long addressId, Long usersId);
+    int deleteAddressByAddressIdAndUsers_Id(Long addressId, Long usersId);
     Optional<List<Address>> findAllByUsers_Id(Long usersId);
     Optional<Address> getAddressByAddressId(Long addressId);
 }
