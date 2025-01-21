@@ -44,4 +44,33 @@ public class CustomExceptions {
             super();
         }
     }
+    public static class CartNotFoundException extends RuntimeException {
+        public CartNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class CartAlreadyExistsException extends RuntimeException {
+        public CartAlreadyExistsException(String message) {
+            super(message);
+        }
+    }
+
+    public static class CartItemNotFoundException extends RuntimeException {
+        public CartItemNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class InvalidCartUpdateException extends RuntimeException {
+        public InvalidCartUpdateException(String message) {
+            super(message);
+        }
+    }
+
+    public static class InvalidCartTotalException extends RuntimeException {
+        public InvalidCartTotalException(String message) {
+            super(message);
+        }
+    }
 }

@@ -146,4 +146,94 @@ public class GlobalExceptionHandler {
                         )
                 );
     }
+
+    @ExceptionHandler(CustomExceptions.CartNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleCartNotFoundException(CustomExceptions.CartNotFoundException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.cart.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.NOT_FOUND
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.CartAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleCartAlreadyExistsException(CustomExceptions.CartAlreadyExistsException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.cart.already.exists",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.CONFLICT
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.CartItemNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleCartItemNotFoundException(CustomExceptions.CartItemNotFoundException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.cart.item.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.NOT_FOUND
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.InvalidCartUpdateException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidCartUpdateException(CustomExceptions.InvalidCartUpdateException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.cart.invalid.update",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.InvalidCartTotalException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidCartTotalException(CustomExceptions.InvalidCartTotalException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.cart.invalid.total",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+    }
 }
