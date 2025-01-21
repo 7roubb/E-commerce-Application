@@ -25,13 +25,16 @@ public class UserRequestDTO {
 
     @NotBlank(groups = {OnCreate.class},
             message = "{user.username.required}")
-    @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$", message = "{user.username.invalid}", groups = {OnCreate.class, OnUpdate.class})
+    @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$", message = "{user.username.invalid}",
+            groups = {OnCreate.class, OnUpdate.class})
     private String username;
 
     @NotBlank(message = "{user.email.required}",
             groups = {OnCreate.class})
     @Email(groups = {OnCreate.class}, message = "{user.email.invalid}")
-    @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "{user.email.pattern.invalid}", groups = {OnCreate.class})
+    @Pattern(regexp = "^[\\w.-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",
+            message = "{user.email.pattern.invalid}",
+            groups = {OnCreate.class ,OnUpdate.class})
     private String email;
 
     @NotBlank(groups = {OnCreate.class},
@@ -39,13 +42,13 @@ public class UserRequestDTO {
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
             message = "{user.password.weak}",
-            groups = {OnCreate.class}
+            groups = {OnCreate.class,OnUpdate.class}
     )
     private String password;
 
     @NotBlank(groups = {OnCreate.class},
             message = "{user.fullName.required}")
-    @Pattern(regexp = "^[A-Za-z\s'-]{1,50}$",groups = {OnCreate.class})
+    @Pattern(regexp = "^[A-Za-z\s'-]{1,50}$",groups = {OnCreate.class,OnUpdate.class})
     private String fullName;
 
     @NotNull(groups = {OnCreate.class})

@@ -31,8 +31,8 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(ApiResponse
                         .error(
-                            message,
-                            HttpStatus.CONFLICT
+                                message,
+                                HttpStatus.CONFLICT
                         )
                 );
     }
@@ -52,6 +52,7 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(CustomExceptions.UserNotFound.class)
     public ResponseEntity<ApiResponse<Void>> handleUserNotFound(CustomExceptions.UserNotFound ex) {
         String message = messageSource
@@ -66,6 +67,7 @@ public class GlobalExceptionHandler {
                         HttpStatus.NOT_FOUND)
                 );
     }
+
     @ExceptionHandler(CustomExceptions.EmailAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<Void>> handleEmailAlreadyExists(CustomExceptions.EmailAlreadyExistsException ex) {
         String message = messageSource
@@ -98,6 +100,7 @@ public class GlobalExceptionHandler {
                 );
 
     }
+
     @ExceptionHandler(CustomExceptions.WrongPasswordOrEmail.class)
     public ResponseEntity<ApiResponse<Void>> handleWrongPasswordOrEmail(CustomExceptions.WrongPasswordOrEmail ex) {
         String message = messageSource.
@@ -131,6 +134,7 @@ public class GlobalExceptionHandler {
                         )
                 );
     }
+
     @ExceptionHandler(CustomExceptions.AddressNotFound.class)
     public ResponseEntity<ApiResponse<Void>> handleAddressNotFoundException(CustomExceptions.AddressNotFound ex) {
         String message = messageSource.getMessage(
@@ -224,6 +228,77 @@ public class GlobalExceptionHandler {
         String message = messageSource
                 .getMessage(
                         "exception.cart.invalid.total",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+    }
+    @ExceptionHandler(CustomExceptions.OrderNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleOrderNotFoundException(CustomExceptions.OrderNotFoundException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.order.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.NOT_FOUND
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.PaymentNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handlePaymentNotFoundException(CustomExceptions.PaymentNotFoundException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.payment.not.found",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.NOT_FOUND
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.InvalidOrderUpdateException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidOrderUpdateException(CustomExceptions.InvalidOrderUpdateException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.order.invalid.update",
+                        new Object[]{ex.getMessage()},
+                        LocaleContextHolder.getLocale()
+                );
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse
+                        .error(
+                                message,
+                                HttpStatus.BAD_REQUEST
+                        )
+                );
+    }
+
+    @ExceptionHandler(CustomExceptions.InvalidOrderCreationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidOrderCreationException(CustomExceptions.InvalidOrderCreationException ex) {
+        String message = messageSource
+                .getMessage(
+                        "exception.order.invalid.creation",
                         new Object[]{ex.getMessage()},
                         LocaleContextHolder.getLocale()
                 );

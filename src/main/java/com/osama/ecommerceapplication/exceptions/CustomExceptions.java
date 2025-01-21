@@ -73,4 +73,27 @@ public class CustomExceptions {
             super(message);
         }
     }
+    public static class OrderNotFoundException extends RuntimeException {
+        public OrderNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class PaymentNotFoundException extends RuntimeException {
+        public PaymentNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class InvalidOrderUpdateException extends RuntimeException {
+        public InvalidOrderUpdateException(String message) {
+            super(message);
+        }
+    }
+
+    public static class InvalidOrderCreationException extends RuntimeException {
+        public InvalidOrderCreationException(String message) {
+            super(message);
+        }
+    }
 }
