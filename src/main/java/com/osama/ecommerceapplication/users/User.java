@@ -9,7 +9,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -61,6 +63,6 @@ public class User extends BaseEntity  {
     private Set<Role> roles = new HashSet<>(
     );
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Cart customerCart;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Cart> carts = new ArrayList<>();
 }

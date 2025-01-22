@@ -96,4 +96,15 @@ public class CustomExceptions {
             super(message);
         }
     }
+    public static class ProductNotFoundException extends RuntimeException {
+        public ProductNotFoundException(String message) {
+            super(message);
+        }
+    }
+
+    public static class ProductAlreadyExistsException extends RuntimeException {
+        public ProductAlreadyExistsException(String productName) {
+            super(productName);
+        }
+    }
 }

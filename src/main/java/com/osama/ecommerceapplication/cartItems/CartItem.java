@@ -1,4 +1,4 @@
-package com.osama.ecommerceapplication.carts;
+package com.osama.ecommerceapplication.cartItems;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.osama.ecommerceapplication.products.Product;
@@ -15,7 +15,7 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer cartItemId;
+    private Long cartItemId;
 
 
     @OneToOne

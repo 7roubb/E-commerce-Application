@@ -1,12 +1,6 @@
 package com.osama.ecommerceapplication.products;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.osama.ecommerceapplication.users.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -22,30 +16,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer productId;
 
-    @NotNull
-    @Size(min = 3, max = 30, message = "Product name size should be between 3-30")
+    @Column(nullable = false)
     private String productName;
 
-    @NotNull
-    @DecimalMin(value = "0.00")
+    @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = false)
     private String description;
 
-    @NotNull
+    @Column(nullable = false)
     private String manufacturer;
 
-    @NotNull
-    @Min(value = 0)
+    @Column(nullable = false)
     private Integer quantity;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoryEnum category;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
-
-
-
 
 }

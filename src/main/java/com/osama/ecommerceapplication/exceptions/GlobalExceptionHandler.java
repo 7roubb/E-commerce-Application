@@ -311,4 +311,28 @@ public class GlobalExceptionHandler {
                         )
                 );
     }
+
+    @ExceptionHandler(CustomExceptions.ProductNotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleProductNotFoundException(CustomExceptions.ProductNotFoundException ex) {
+        String message = messageSource.getMessage(
+                "exception.product.not.found",
+                new Object[]{ex.getMessage()},
+                LocaleContextHolder.getLocale()
+        );
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(message, HttpStatus.NOT_FOUND));
+    }
+
+    @ExceptionHandler(CustomExceptions.ProductAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Void>> handleProductAlreadyExistsException(CustomExceptions.ProductAlreadyExistsException ex) {
+        String message = messageSource.getMessage(
+                "exception.product.already.exists",
+                new Object[]{ex.getMessage()},
+                LocaleContextHolder.getLocale()
+        );
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiResponse.error(message, HttpStatus.CONFLICT));
+    }
 }

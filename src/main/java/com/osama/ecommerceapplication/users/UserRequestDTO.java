@@ -5,15 +5,11 @@ import com.osama.ecommerceapplication.common.OnCreate;
 import com.osama.ecommerceapplication.common.OnUpdate;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 import java.util.Set;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
 @Validated
 @Valid
 public class UserRequestDTO {
