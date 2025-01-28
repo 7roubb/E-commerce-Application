@@ -68,10 +68,8 @@ public class AddressController {
         );
     }
 
-
     public String getMessage(String code) {
-        return messageSource.getMessage(code, new Object[]{null}, LocaleContextHolder.getLocale());
+        return messageSource.
+                getMessage(code, new Object[]{null}, LocaleContextHolder.getLocale());
     }
-
-
 }
